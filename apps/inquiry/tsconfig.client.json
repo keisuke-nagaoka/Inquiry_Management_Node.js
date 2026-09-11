@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES2019",
+        "module": "None",
+        "outDir": "public/js",
+        "rootDir": "public/ts",
+        "strict": true,
+        "lib": [
+            "DOM",
+            "ES2019"
+        ],
+        "types": []
+    },
+    "include": [
+        "public/ts"
+    ]
+}

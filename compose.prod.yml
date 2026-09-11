@@ -1,0 +1,39 @@
+# EC2上で使う本番構成。ローカルのcompose.ymlと違い、MySQLコンテナは持たず
+# apps/inquiry/.env.production の DB_HOST でRDSを指す。
+# 使い方: docker compose -f compose.prod.yml up -d --build
+services:
+  nginx:
+    image: nginx
+    container_name: node_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/default.prod.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/server.crt:/etc/nginx/ssl/server.crt
+      - ./docker/nginx/server.key:/etc/nginx/ssl/server.key
+    depends_on:
+      - inquiry-api
+    restart: unless-stopped
+
+  inquiry-api:
+    container_name: inquiry-api
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile.prod
+      args:
+        APP_DIR: apps/inquiry
+    env_file:
+      - ./apps/inquiry/.env.production
+    restart: unless-stopped
+
+  # other-api:
+  #   container_name: other-api
+  #   build:
+  #     context: .
+  #     dockerfile: docker/node/Dockerfile.prod
+  #     args:
+  #       APP_DIR: apps/other
+  #   env_file:
+  #     - ./apps/other/.env.production
+  #   restart: unless-stopped

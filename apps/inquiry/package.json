@@ -1,0 +1,26 @@
+{
+  "name": "inquiry-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "問い合わせ管理システム (TypeScript + Express + MySQL)",
+  "scripts": {
+    "dev": "concurrently \"tsc -w -p tsconfig.client.json\" \"tsx watch src/index.ts\"",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.2.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.5.0",
+    "concurrently": "^9.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.2"
+  }
+}
