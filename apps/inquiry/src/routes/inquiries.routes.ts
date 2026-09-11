@@ -17,6 +17,7 @@ import {
 
 export const inquiriesRouter = Router();
 
+// 各ルートは「入力検証 -> 検証結果の確認 -> 非同期処理」の順に実行する。
 inquiriesRouter.get('/', listQueryValidator, validateRequest, asyncHandler(listInquiries));
 inquiriesRouter.get('/:id', idParamValidator, validateRequest, asyncHandler(getInquiry));
 inquiriesRouter.post('/', createInquiryValidator, validateRequest, asyncHandler(createInquiry));
